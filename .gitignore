@@ -5,3 +5,6 @@ target/
 .classpath
 .project
 .settings/
+
+# Configuracao local com credenciais (nao versionar)
+config/application.properties
