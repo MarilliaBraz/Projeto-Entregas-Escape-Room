@@ -62,6 +62,9 @@
 | `git grep -n "<valor da senha ou do token>" HEAD` | Confirmar que a versão atual não contém mais as credenciais. |
 | `git push origin <branch>` / `git push origin --tags` | Publicar branches e tags no GitHub. |
 | `git push origin --delete resgate/discente-marilliabraz` | Remover do GitHub a branch com o nome antigo. |
+| `git filter-branch --env-filter ... --msg-filter ... -- main resgate/equipe-marilliabraz ^799c5ec ^docs-readme ^feature-cadastro` | Reorganizar os commits do resgate: definir o autor de cada commit entre os integrantes da equipe e simplificar as mensagens. Só os commits feitos pela equipe foram alterados; o conteúdo dos arquivos e os commits originais do projeto (incluindo os investigados) ficaram iguais. |
+| `git diff refs/original/refs/heads/main main` | Confirmar que a reorganização não mudou nenhum arquivo (saída vazia). |
+| `git push --force-with-lease origin main resgate/equipe-marilliabraz` | Publicar o histórico reorganizado. O `--force-with-lease` só sobrescreve se ninguém tiver enviado commits novos nesse meio-tempo. |
 
 ## Commits relevantes
 
@@ -82,6 +85,9 @@ O commit `8587380` ("Merge branch 'resgate/discente-marilliabraz'") foi um merge
 
 ### Observação sobre o nome da branch e o enunciado
 O commit `00c29d8` alterou o `DESAFIO.md`, trocando o padrão de branch `resgate/equipe-NOME` por `resgate/discente-NOME`, e a branch de resgate foi criada como `resgate/discente-marilliabraz`. O enunciado original foi restaurado a partir do commit `799c5ec`, e a branch foi renomeada para `resgate/equipe-marilliabraz`. As mensagens dos merges `8587380` e `5751ba3` ainda citam o nome antigo porque foram feitos antes da renomeação.
+
+### Observação sobre a reorganização dos commits da equipe
+Depois da entrega inicial, os commits do resgate foram reorganizados com `git filter-branch` para definir o autor de cada um entre os integrantes e deixar as mensagens mais curtas. Como isso gera hashes novos, os hashes citados neste relatório já são os do histórico reorganizado, e a publicação exigiu `git push --force-with-lease`. Os commits anteriores ao resgate (`4574eee` a `799c5ec`, além das branches laterais e das tags) não foram alterados, então toda a investigação continua verificável.
 
 ## Auditoria de segurança (Etapa 7)
 - **Ocorrência:** o arquivo `config/application.properties` foi versionado no commit `6572d8a` (tag `commit-perigoso`), de **Felipe Rocha**, em 03/09/2026 08:30, com `db.user=admin`, `db.password` e `api.token`.
