@@ -1,6 +1,6 @@
 # Relatório de Resgate
 - Equipe: Marillia Braz Neves Brito (@MarilliaBraz), Pedro Feitosa (@feitosapedrofatesg-svg), YanSantos-TI (@zod1827), @LucasMNDL3
-- Branch de trabalho: `resgate/discente-marilliabraz`
+- Branch de trabalho: `resgate/equipe-marilliabraz` (criada inicialmente como `resgate/discente-marilliabraz` e renomeada)
 
 ## Diagnóstico
 
@@ -23,6 +23,9 @@
 | `git show <hash>` | Inspecionar o diff de cada commit suspeito. |
 | `git log --oneline main..<branch>` / `git diff --stat main...<branch>` | Ver o que cada branch lateral trazia em relação à `main`. |
 | `git switch -c resgate/discente-marilliabraz` | Criar a branch de resgate. |
+| `git branch -m resgate/discente-marilliabraz resgate/equipe-marilliabraz` | Renomear a branch para o padrão `resgate/equipe-NOME` exigido na regra 4. |
+| `git checkout 799c5ec -- DESAFIO.md` | Restaurar o enunciado original do desafio, que havia sido alterado no commit `4445798`. |
+| `git push origin --delete resgate/discente-marilliabraz` | Remover do GitHub a branch com o nome antigo. |
 | `git revert <hash>` | Desfazer commits problemáticos criando novos commits, sem reescrever o histórico (correção identificável). |
 | `git merge --no-ff <branch>` | Integrar `docs-readme`, `feature-cadastro` e, ao final, a branch de resgate na `main`, mantendo um commit de merge visível. |
 | `git grep -iE "SuperSenha\|TOKEN-NAO" HEAD` | Confirmar que a versão atual não contém mais as credenciais. |
@@ -42,6 +45,9 @@
 | `2624e5c` | Validação de status (branch `feature-cadastro`). **Integrado** em `bbb13c4`. |
 | `a6f356d` | Nota do hotfix (branch `hotfix-login`). Usado como evidência para a correção do login. |
 
+### Observação sobre o histórico da `main`
+O commit `aa15cba` ("integrar branch resgate/discente-marilliabraz na main") foi um merge antecipado: a branch de resgate foi integrada na `main` antes das correções, levando junto os commits problemáticos (`9a6d3b0` a `64f88f6`). Para não reescrever um histórico já publicado, esse merge foi mantido, e as correções foram feitas depois na mesma branch de resgate e integradas na `main` pelo merge `6d15f52`. Por isso, entre `aa15cba` e `6d15f52` a `main` não compila; a versão final da `main` atende a todos os critérios de saída.
+
 ## Validação final
 
 - **Compilação:** `mvn clean package` terminou sem erros e gerou `target/classes`.
@@ -50,3 +56,6 @@
 - **Cadastro:** após o login, o sistema lista `#1 | Notebook | ... | Entrega: Av. Goiás, 1000 - Sala 8, Goiânia/GO - CEP: 74000-000`, ou seja, a mercadoria é criada com um endereço.
 - **README:** contém requisitos (Java 17+, Maven 3.8+), comandos para compilar e executar e o acesso de demonstração.
 - **Segurança:** `config/application.properties` contém apenas `app.name`, e `git grep` na versão atual não encontra a senha nem o token. Observação: as credenciais continuam no histórico (`6572d8a`); em um cenário real elas devem ser consideradas comprometidas e trocadas.
+
+### Observação sobre o nome da branch e o enunciado
+O commit `4445798` alterou o `DESAFIO.md`, trocando o padrão de branch `resgate/equipe-NOME` por `resgate/discente-NOME`, e a branch de resgate foi criada como `resgate/discente-marilliabraz`. O enunciado original foi restaurado a partir do commit `799c5ec`, e a branch foi renomeada para `resgate/equipe-marilliabraz`. As mensagens dos merges `aa15cba` e `6d15f52` ainda citam o nome antigo porque foram mantidas como estavam no histórico publicado.
