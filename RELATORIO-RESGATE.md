@@ -55,7 +55,7 @@
 | `git log --oneline main..<branch>` / `git diff --stat main...<branch>` | Ver o que cada branch lateral trazia em relação à `main`. |
 | `git switch -c resgate/discente-marilliabraz` | Criar a branch de resgate. |
 | `git branch -m resgate/discente-marilliabraz resgate/equipe-marilliabraz` | Renomear a branch para o padrão `resgate/equipe-NOME`. |
-| `git checkout 799c5ec -- DESAFIO.md` | Restaurar o enunciado original do desafio, que havia sido alterado no commit `4445798`. |
+| `git checkout 799c5ec -- DESAFIO.md` | Restaurar o enunciado original do desafio, que havia sido alterado no commit `00c29d8`. |
 | `git revert <hash>` | Desfazer commits problemáticos criando novos commits, sem reescrever o histórico. O `git revert 64f88f6` recuperou o arquivo excluído. |
 | `git merge --no-ff <branch>` | Integrar `docs-readme`, `feature-cadastro` e a branch de resgate na `main`, mantendo um commit de merge visível. |
 | `git rm config/application.properties` | Remover o arquivo de credenciais da versão atual. |
@@ -68,20 +68,20 @@
 | Hash | Situação |
 |---|---|
 | `356ec6f` | Último estado funcional (tag `v1.0.0-funcional`), usado como referência nas comparações. |
-| `64f88f6` | Excluiu `Validador.java`. **Revertido** (arquivo recuperado) em `315d430`. |
-| `a70ee84` | Quebrou o cadastro e a compilação. **Revertido** em `a99d581`. |
-| `0cd80f6` | Esvaziou o README. **Revertido** em `5c7d378`. |
-| `9a6d3b0` | Quebrou o login. **Revertido** em `b35ee87`. |
-| `7fe8faa` | Seção "Fluxo recomendado" do README (branch `docs-readme`). **Integrado** em `98ad9a1`. |
-| `2624e5c` | Validação de status (branch `feature-cadastro`). **Integrado** em `bbb13c4`. |
-| `6572d8a` | Adicionou credenciais (tag `commit-perigoso`). Credenciais apagadas do arquivo em `3a8f7b3`; arquivo removido da versão atual e incluído no `.gitignore` em `3cef5af`. |
+| `64f88f6` | Excluiu `Validador.java`. **Revertido** (arquivo recuperado) em `820d22e`. |
+| `a70ee84` | Quebrou o cadastro e a compilação. **Revertido** em `48221f3`. |
+| `0cd80f6` | Esvaziou o README. **Revertido** em `6baae00`. |
+| `9a6d3b0` | Quebrou o login. **Revertido** em `d663813`. |
+| `7fe8faa` | Seção "Fluxo recomendado" do README (branch `docs-readme`). **Integrado** em `9701167`. |
+| `2624e5c` | Validação de status (branch `feature-cadastro`). **Integrado** em `8918601`. |
+| `6572d8a` | Adicionou credenciais (tag `commit-perigoso`). Credenciais apagadas do arquivo em `ee9470e`; arquivo removido da versão atual e incluído no `.gitignore` em `4f97456`. |
 | `a6f356d` | Nota do hotfix (branch `hotfix-login`). Usado como evidência para a correção do login. |
 
 ### Observação sobre o histórico da `main`
-O commit `aa15cba` ("integrar branch resgate/discente-marilliabraz na main") foi um merge antecipado: a branch de resgate foi integrada na `main` antes das correções, levando junto os commits problemáticos (`9a6d3b0` a `64f88f6`). Para não reescrever um histórico já publicado, esse merge foi mantido, e as correções foram feitas depois na mesma branch de resgate e integradas na `main` pelos merges seguintes. Por isso, entre `aa15cba` e `6d15f52` a `main` não compila; a versão final da `main` atende a todos os critérios de saída.
+O commit `8587380` ("Merge branch 'resgate/discente-marilliabraz'") foi um merge antecipado: a branch de resgate foi integrada na `main` antes das correções, levando junto os commits problemáticos (`9a6d3b0` a `64f88f6`). Esse merge foi mantido, e as correções foram feitas depois na mesma branch de resgate e integradas na `main` pelos merges seguintes. Por isso, entre `8587380` e `5751ba3` a `main` não compila; a versão final da `main` atende a todos os critérios de saída.
 
 ### Observação sobre o nome da branch e o enunciado
-O commit `4445798` alterou o `DESAFIO.md`, trocando o padrão de branch `resgate/equipe-NOME` por `resgate/discente-NOME`, e a branch de resgate foi criada como `resgate/discente-marilliabraz`. O enunciado original foi restaurado a partir do commit `799c5ec`, e a branch foi renomeada para `resgate/equipe-marilliabraz`. As mensagens dos merges `aa15cba` e `6d15f52` ainda citam o nome antigo porque foram mantidas como estavam no histórico publicado.
+O commit `00c29d8` alterou o `DESAFIO.md`, trocando o padrão de branch `resgate/equipe-NOME` por `resgate/discente-NOME`, e a branch de resgate foi criada como `resgate/discente-marilliabraz`. O enunciado original foi restaurado a partir do commit `799c5ec`, e a branch foi renomeada para `resgate/equipe-marilliabraz`. As mensagens dos merges `8587380` e `5751ba3` ainda citam o nome antigo porque foram feitos antes da renomeação.
 
 ## Auditoria de segurança (Etapa 7)
 - **Ocorrência:** o arquivo `config/application.properties` foi versionado no commit `6572d8a` (tag `commit-perigoso`), de **Felipe Rocha**, em 03/09/2026 08:30, com `db.user=admin`, `db.password` e `api.token`.
