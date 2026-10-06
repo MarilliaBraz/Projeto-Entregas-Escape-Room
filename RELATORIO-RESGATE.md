@@ -1,5 +1,7 @@
 # Relatório de Resgate
-- Equipe: Marillia Braz Neves Brito (@MarilliaBraz), Pedro Feitosa (@feitosapedrofatesg-svg), YanSantos-TI (@zod1827), @LucasMNDL3
+- Equipe: Equipe Resgate
+- Integrantes: Marilia Braz (@MarilliaBraz), Pedro Henrique Feitosa (@feitosapedrofatesg-svg), Lucas Mendes (@LucasMNDL3) e Yan Santos (@zod1827)
+- Data: 06/10/2026
 - Branch de trabalho: `resgate/equipe-marilliabraz` (criada inicialmente como `resgate/discente-marilliabraz` e renomeada)
 
 ## Diagnóstico
